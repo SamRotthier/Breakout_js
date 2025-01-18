@@ -52,6 +52,19 @@
             font-size: 3em;
         }
 
+        .brick {
+            position: absolute;
+            top:0;
+            left:0;
+            width: 80px;
+            height: 50px;
+            padding: 5px;
+            color: white;
+            box-shadow: 0px 1px 8px 0px black;
+            font-size: 1.9em;
+            text-align: center;
+        }
+
         .gameover {
             position: absolute;
             text-align: center;
@@ -83,7 +96,7 @@
         var btn_start = document.querySelector('.startBtn');
 
         // Variables
-        var gameOver = false;
+        var gameOver = true;
         var gameInPlay = false;
         var score = 0;
         var lives = 5;
@@ -112,14 +125,43 @@
         });
 
         function startGame(){
+            if(gameOver){
             document.querySelector('.gameover').style.display = 'none';
             ball.style.display = 'block';
+            lives = 5;
+            setupBricks(12);
+            lifeUpdater();
             animationRepeat = requestAnimationFrame(update)
             gameOver = false;
             gameInPlay = false;
             //console.log(paddle);
             //console.dir(paddle); // dir gives all the info of the paddle div
+            }
         }   
+
+        function setupBricks(num){
+            var row = {x:((containerDim.width % 100)/2),y:50};
+            for(var x = 0; x < num; x++){
+                if(row.x > (containerDim.width - 100)){
+                    row.y += 70;
+                    row.x = ((containerDim.width % 100)/2)
+                }
+                brickMaker(row);
+                row.x += 100;
+            }
+        }
+
+        function brickMaker(row){
+            var div = document.createElement('div');
+            div.setAttribute('class','brick')
+            div.style.backgroundColor = 'red';
+            var pointDiv = Math.ceil(Math.random() * 10) +2;
+            div.dataset.points = pointDiv;
+            div.innerHTML = pointDiv;
+            div.style.left = row.x + 'px';
+            div.style.top = row.y + 'px';
+            container.appendChild(div);
+        }
 
         function update(){
             if(gameOver===false){
