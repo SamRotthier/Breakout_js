@@ -99,6 +99,7 @@
             e.preventDefault();
             if(key===37) paddle.left = true;
             else if (key===39) paddle.right = true;
+            else if (key===38 && !gameInPlay) gameInPlay = true;
             //console.log(key);
 
         });
@@ -115,7 +116,7 @@
             ball.style.display = 'block';
             animationRepeat = requestAnimationFrame(update)
             gameOver = false;
-            gameInPlay = true;
+            gameInPlay = false;
             //console.log(paddle);
             //console.dir(paddle); // dir gives all the info of the paddle div
         }   
@@ -154,11 +155,19 @@
                 ballDir[0] *= -1; // *-1 will change the direction
             }
             if( y > (containerDim.height - ball.offsetHeight) || y < 0){
+                if( y > (containerDim.height - ball.offsetHeight)){
+                    fallOffEdge();
+                    return;
+                }
                 ballDir[1] *= -1;
             }
 
             if(isCollide(ball,paddle)){
-                console.log('HIT');
+                //console.log('HIT');
+                var nDir = ((x - paddle.offsetLeft) - (paddle.offsetWidth / 2 )) / 10;
+                console.log(nDir);
+                ballDir[0] = nDir;
+                ballDir[1] *= -1;
             }
             x += ballDir[0];
             y += ballDir[1];
@@ -176,6 +185,25 @@
             //console.log(!(aRect.bottom < bRect.top || aRect.top > bRect.bottom || aRect.right < bRect.left || aRect.left > bRect.right));
             return !(aRect.bottom < bRect.top || aRect.top > bRect.bottom || aRect.right < bRect.left || aRect.left > bRect.right)
 
+        }
+
+        function lifeUpdater(){
+            document.querySelector('.lives').innerText = lives;
+        }
+
+        
+        function stopper(){
+            gameInPlay = false;
+            ballDir[0,-5];
+            waitingOnPaddle();
+            window.cancelAnimationFrame(animationRepeat);
+        }
+
+
+        function fallOffEdge(){
+            lives--;
+            lifeUpdater();
+            stopper();
         }
 
     </script>
