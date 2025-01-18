@@ -13,17 +13,17 @@
             overflow:hidden;
             border: 1px solid black;
             background-color: black;
-            margin-top:20px;
+            margin-top: 20px;
             position: relative;
         }
 
         #ball {
             position: absolute;
-            background-color:white;
+            background-color: white;
             height: 20px;
             width: 20px;
             top: 50%;
-            left:50%;
+            left: 50%;
             border-radius: 25px;
             display: none;
         }
@@ -34,14 +34,14 @@
             width: 150px;
             background-color: white;
             left: 50%;
-            bottom: 30%;
+            bottom: 30px;
             border-radius: 25px;
         }
 
         .startBtn {
             display: inline-block;
             padding: 15px;
-            border: 1ox solid black;
+            border: 1px solid black;
             background-color: red;
             color: white;
             font-size: 2em;
@@ -68,7 +68,7 @@
     <div>
         <div class="startBtn">Start Game</div>
         Score:<span class=""score>0</span>
-        Lices:<span class="lives">0</span>
+        Lives:<span class="lives">0</span>
     </div>
     <div class="container">
         <div id="ball"></div>
@@ -111,12 +111,13 @@
         });
 
         function startGame(){
-            document.querySelector('.gameover').style.display='none';
-            ball.style.display='block';
+            document.querySelector('.gameover').style.display = 'none';
+            ball.style.display = 'block';
             animationRepeat = requestAnimationFrame(update)
-            var gameOver = false;
-            var gameInPlay = true;
-
+            gameOver = false;
+            gameInPlay = true;
+            console.log("test")
+            console.log(gameInPlay)
             //console.log(paddle);
             //console.dir(paddle); // dir gives all the info of the paddle div
         }   
@@ -130,10 +131,42 @@
                     pCurrent += 5;
                 }
                 paddle.style.left = pCurrent + 'px';
+                console.log(gameInPlay)
+                if(!gameInPlay){
+                    console.log("test2")
+                    waitingOnPaddle();
+                }else{
+                    ballMove();
+                }
 
                 animationRepeat = requestAnimationFrame(update); // Animation loop
                 //console.log(pCurrent);
             }
+        }
+
+        function waitingOnPaddle(){
+            ball.style.top = (paddle.offsetTop - 22) + 'px';
+            ball.style.left = (paddle.offsetLeft + 70) + 'px';
+
+        }
+
+        function ballMove(){
+            var x = ball.offsetLeft;
+            var y = ball.offsetTop;
+
+            if(x > (containerDim.width - ball.offsetWidth) || x < 0 ){
+                ballDir[0] *= -1; // *-1 will change the direction
+            }
+            if( y > (containerDim.height - ball.offsetHeight) || y < 0){
+                ballDir[1] *= -1;
+            }
+
+            x += ballDir[0];
+            y += ballDir[1];
+
+
+            ball.style.top = y + 'px';
+            ball.style.left = x + 'px';
         }
 
     </script>
