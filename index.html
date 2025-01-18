@@ -80,7 +80,7 @@
 <body>
     <div>
         <div class="startBtn">Start Game</div>
-        Score:<span class=""score>0</span>
+        Score:<span class="score">0</span>
         Lives:<span class="lives">0</span>
     </div>
     <div class="container">
@@ -211,9 +211,18 @@
                 ballDir[0] = nDir;
                 ballDir[1] *= -1;
             }
+            
+            var tempBricks = document.querySelectorAll('.brick');
+            for (var tarBrick of tempBricks){
+                if(isCollide(tarBrick,ball)){
+                    ballDir[1] *=-1;
+                    tarBrick.parentNode.removeChild(tarBrick);
+                    scoreUpdate(tarBrick.dataset.points);
+                }
+            }
+
             x += ballDir[0];
             y += ballDir[1];
-
 
             ball.style.top = y + 'px';
             ball.style.left = x + 'px';
@@ -231,6 +240,11 @@
 
         function lifeUpdater(){
             document.querySelector('.lives').innerText = lives;
+        }
+
+        function scoreUpdate(num){
+            score += parseInt(num);
+            document.querySelector('.score').innerText = score;
         }
 
         
