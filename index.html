@@ -116,8 +116,6 @@
             animationRepeat = requestAnimationFrame(update)
             gameOver = false;
             gameInPlay = true;
-            console.log("test")
-            console.log(gameInPlay)
             //console.log(paddle);
             //console.dir(paddle); // dir gives all the info of the paddle div
         }   
@@ -131,9 +129,7 @@
                     pCurrent += 5;
                 }
                 paddle.style.left = pCurrent + 'px';
-                console.log(gameInPlay)
                 if(!gameInPlay){
-                    console.log("test2")
                     waitingOnPaddle();
                 }else{
                     ballMove();
@@ -161,12 +157,25 @@
                 ballDir[1] *= -1;
             }
 
+            if(isCollide(ball,paddle)){
+                console.log('HIT');
+            }
             x += ballDir[0];
             y += ballDir[1];
 
 
             ball.style.top = y + 'px';
             ball.style.left = x + 'px';
+        }
+
+        function isCollide(a,b){
+            var aRect = a.getBoundingClientRect();
+            var bRect = b.getBoundingClientRect();
+            //console.log(aRect)
+            //console.log(bRect)
+            //console.log(!(aRect.bottom < bRect.top || aRect.top > bRect.bottom || aRect.right < bRect.left || aRect.left > bRect.right));
+            return !(aRect.bottom < bRect.top || aRect.top > bRect.bottom || aRect.right < bRect.left || aRect.left > bRect.right)
+
         }
 
     </script>
