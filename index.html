@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
 
-        .container{
+        .container {
             height: 600px;
             width: 80%;
             margin: 10%;
@@ -17,7 +17,7 @@
             position: relative;
         }
 
-        #ball{
+        #ball {
             position: absolute;
             background-color:white;
             height: 20px;
@@ -28,7 +28,7 @@
             display: none;
         }
 
-        .paddle{
+        .paddle {
             position: absolute;
             height: 20px;
             width: 150px;
@@ -38,7 +38,7 @@
             border-radius: 25px;
         }
 
-        .startBtn{
+        .startBtn {
             display: inline-block;
             padding: 15px;
             border: 1ox solid black;
@@ -48,8 +48,18 @@
             text-align: center;
         }
 
-        .score, .lives{
+        .score, .lives {
             font-size: 3em;
+        }
+
+        .gameover {
+            position: absolute;
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            line-height: 300px;
+            text-transform: uppercase;
+            width: 100%;
         }
 
     </style>
@@ -74,7 +84,7 @@
 
         // Variables
         var gameOver = false;
-        var gameInPlay=false;
+        var gameInPlay = false;
         var score = 0;
         var lives = 5;
         var animationRepeat;
@@ -114,6 +124,14 @@
         function update(){
             if(gameOver===false){
                 var pCurrent = paddle.offsetLeft;
+                if(paddle.left && pCurrent > 0 ){
+                    pCurrent -=5;
+                } else if(paddle.right && pCurrent < (containerDim.width - paddle.offsetWidth)){
+                    pCurrent += 5;
+                }
+                paddle.style.left = pCurrent + 'px';
+
+                animationRepeat = requestAnimationFrame(update); // Animation loop
                 //console.log(pCurrent);
             }
         }
