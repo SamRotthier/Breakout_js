@@ -42,6 +42,7 @@
         function startGame(){
             if(gameOver){
             document.querySelector('.gameover').style.display = 'none';
+            document.querySelector('.startBtn').style.display = 'none';
             ball.style.display = 'block';
             lives = amountStartLives; // this needs to be set back to 5 everytime the start game button is pressed
             setupBricks(numBricks);
@@ -102,7 +103,6 @@
                 }else{
                     ballMove();
                 }
-
                 animationRepeat = requestAnimationFrame(update); // Animation loop
                 //console.log(pCurrent);
             }
@@ -185,6 +185,7 @@
         function EndGame(){
             document.querySelector('.gameover').style.display = 'block';
             document.querySelector('.gameover').innerHTML = 'GAME OVER <br> Your Score: '+score;
+            document.querySelector('.startBtn').style.display = 'inline-block';
             gameOver = true;
             ball.style.display = 'none';
             let tempBricks = document.querySelectorAll('.brick');
