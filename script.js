@@ -184,7 +184,7 @@
 
         function EndGame(){
             document.querySelector('.gameover').style.display = 'block';
-            document.querySelector('.gameover').innerHTML = 'GAME OVER <br> Your Score: '+score;
+            document.querySelector('.gameover').innerHTML = 'GAME OVER <br> Your Score was: '+score;
             document.querySelector('.startBtn').style.display = 'inline-block';
             gameOver = true;
             ball.style.display = 'none';

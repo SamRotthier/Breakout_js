@@ -32,21 +32,24 @@
 
 .startBtn {
     display: inline-block;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid black;
     background: linear-gradient(#65ff28, #d7ffc7);
     color: black;
+    /*
     font-size: 2em;
     font-family: fantasy;
+    */
     text-align: center;
     border-radius: 10px;
 }
 
-
+/*
 .score, .lives {
     font-size: 3em;
     font-family: fantasy;
 }
+    */
 
 .brick {
     position: absolute;
@@ -71,4 +74,9 @@
     line-height: 300px;
     text-transform: uppercase;
     width: 100%;
+}
+
+.textStyle{
+    font-size: 2em;
+    font-family: fantasy;
 }
