@@ -1,4 +1,4 @@
-In this project i made a version of the popular game Breakout.
+In this project I made a version of the popular game Breakout.
 We don't use libraries, everything is in html/css/javascript.
 Controls are the arrow keys (left, right and up).
 After pressing the start button at the top left, you can launch a ball with the up key.
