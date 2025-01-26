@@ -4,4 +4,5 @@ Controls are the arrow keys (left, right and up).
 After pressing the start button at the top left, you can launch a ball with the up key.
 
 Followed tutorial: https://udemy.com/course/create-javascript-game
+
 I deviated from the tutorial to make the code cleaner.
