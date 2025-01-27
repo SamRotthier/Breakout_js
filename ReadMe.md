@@ -5,4 +5,4 @@ After pressing the start button at the top left, you can launch a ball with the 
 
 Followed tutorial: https://udemy.com/course/create-javascript-game
 
-I deviated from the tutorial to make the code cleaner.
+I deviated from the tutorial to make the code cleaner and adding some better customisation.
